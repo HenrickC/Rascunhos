@@ -38,7 +38,7 @@ No* insere_arv(No *raiz, int valor){
     return raiz;
 }
 
-void imprime_arv(No *raiz){
+void imprime_em_ordem(No *raiz){
     if (raiz!=NULL){
         imprime_arv(raiz->esq);
         printf("%d ", raiz->valor);
@@ -46,6 +46,23 @@ void imprime_arv(No *raiz){
     }
 
 
+}
+
+void imprime_pre_ordem(No *raiz){
+    if(raiz !=NULL){
+        printf("%d", raiz->valor);
+        imprime_pre_ordem(raiz->esq);
+        imprime_pre_ordem(raiz->dir);
+        
+    }
+}
+
+void imprime_pos_ordem(No *raiz){
+    if(raiz !=NULL){
+        imprime_pos_ordem(raiz->esq);
+        imprime_pos_ordem(raiz->dir);
+        printf("%d", raiz->valor);
+    }
 }
 
 void libera_arv(No *raiz){
