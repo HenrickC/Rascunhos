@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "vetor.h"
+
+
+
+
+
+/*Arvore*/
+typedef struct No{
+    int valor;
+    struct No *esq;
+    struct No *dir;
+
+}No;
+
+
+
+No* criarNo(int valor){
+   No *novo_no = (No*)malloc(sizeof(No));
+   novo_no->valor = valor;
+   novo_no->esq = NULL;
+   novo_no->dir = NULL;
+   return novo_no;
+}
+
+No* insere_arv(No *raiz, int valor){
+    if(raiz == NULL){
+        return criarNo(valor);
+    }
+    
+    if (valor < raiz->valor){
+        raiz->esq = insere_arv(raiz->esq, valor);   
+    }
+    else if(valor > raiz->valor){
+        raiz->dir = insere_arv(raiz->dir, valor);
+    }
+    return raiz;
+}
+
+void imprime_arv(No *raiz){
+    if (raiz!=NULL){
+        imprime_arv(raiz->esq);
+        printf("%d ", raiz->valor);
+        imprime_arv(raiz->dir);
+    }
+
+
+}
+
+void libera_arv(No *raiz){
+    if(raiz!=NULL){
+        libera_arv(raiz->esq);
+        libera_arv(raiz->dir);
+        free(raiz);
+    }
+}
+
+No *preenche_arv(No *raiz, int *vetor, int tamanho){
+    for(int i = 0; i<tamanho;i++){
+        raiz = insere_arv(raiz, vetor[i]);
+    }
+    return raiz;
+}
+
+
+/*imprimir o vetor*/
+/*Imprimir os 3 tipos de encaminhanmento pré ordem, em ordem, pós ordem*/
+
+int main(){
+
+    Vetor *vet = criaVetor(16);
+    populaVetorAleatorio(vet);
+    imprime_vet(vet);
+
+
+
+}
